@@ -303,6 +303,14 @@ router.post('/login', async (req, res) => {
 
   req.session.userId = user._id.toString();
 
+req.session.save((err) => {
+  if (err) {
+    console.error('Session save error:', err);
+    return res.status(500).json({
+      error: 'ไม่สามารถสร้าง session ได้'
+    });
+  }
+
   res.json({
     id: user._id.toString(),
     full_name: user.full_name,
