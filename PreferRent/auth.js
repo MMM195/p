@@ -1,5 +1,5 @@
 // ===== ระบบสมาชิก (PHP + MySQL, ใช้ PHP session แทน Supabase Auth) =====
-const API_BASE = 'http://localhost:4000/api';
+const API_BASE = 'https://preferrent-api.onrender.com/api';
 
 const authWidget = document.getElementById('authWidget');
 const authModalOverlay = document.getElementById('authModalOverlay');
