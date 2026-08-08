@@ -320,14 +320,6 @@ router.post('/login', async (req, res) => {
   });
 });
 
-  res.json({
-    id: user._id.toString(),
-    full_name: user.full_name,
-    email: user.email,
-    is_admin: !!user.is_admin,
-  });
-});
-
 router.post('/logout', (req, res) => {
   req.session.destroy(() => {
     res.clearCookie('connect.sid');
