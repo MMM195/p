@@ -29,12 +29,13 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
-  cookie: {
-    httpOnly: true,
-    secure: isProd,                       // ต้องเป็น true เมื่อรันบน https จริง
-    sameSite: isProd ? 'none' : 'lax',    // 'none' จำเป็นถ้า frontend/backend คนละโดเมนบน https
-    maxAge: 1000 * 60 * 60 * 24 * 7,      // 7 วัน
-  },
+ cookie: {
+  httpOnly: true,
+  secure: isProd,
+  sameSite: isProd ? 'none' : 'lax',
+  domain: isProd ? '.onrender.com' : undefined,
+  maxAge: 1000 * 60 * 60 * 24 * 7,
+}
 }));
 
 // คง path เดิมไว้ทั้งหมด (เช่น /api/rooms.php) เพื่อให้ frontend เดิมเรียกได้โดยไม่ต้องแก้ endpoint
