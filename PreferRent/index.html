@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PreferRent — โรงแรมริมแม่น้ำเจ้าพระยา</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav id="mainnav">
+  <div class="brand"><img class="mark" src="images/Logo.png" alt="PreferRent"> PreferRent</div>
+  <button type="button" class="nav-toggle" id="navToggle" aria-label="เปิดเมนู" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="navlinks">
+    <a href="#rooms">ห้องพัก</a>
+    <a href="#amenities">สิ่งอำนวยความสะดวก</a>
+    <a href="#reviews">รีวิว</a>
+    <a href="#contact">ติดต่อ</a>
+    <a href="#book">จองเลย</a>
+    <a href="bookings.html">การจองของฉัน</a>
+  </div>
+  <div class="auth-widget" id="authWidget">
+    <button type="button" class="nav-cta" id="authTrigger">เข้าสู่ระบบ</button>
+  </div>
+</nav>
+
+<div class="auth-modal-overlay" id="authModalOverlay">
+  <div class="auth-modal">
+    <button type="button" class="auth-modal-close" id="authModalClose">×</button>
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab active" data-tab="login">เข้าสู่ระบบ</button>
+      <button type="button" class="auth-tab" data-tab="signup">สมัครสมาชิก</button>
+    </div>
+
+    <form id="loginForm" class="auth-form">
+      <label>อีเมล
+        <input type="email" id="loginEmail" required>
+      </label>
+      <label>รหัสผ่าน
+        <input type="password" id="loginPassword" required>
+      </label>
+      <p class="auth-error" id="loginError"></p>
+      <button type="submit" class="search-btn auth-submit">เข้าสู่ระบบ</button>
+    </form>
+
+    <form id="signupForm" class="auth-form" style="display:none;">
+      <label>ชื่อ
+        <input type="text" id="signupName" required>
+      </label>
+      <label>อีเมล
+        <input type="email" id="signupEmail" required>
+      </label>
+      <label>รหัสผ่าน
+        <input type="password" id="signupPassword" required minlength="6">
+      </label>
+      <label>ยืนยันรหัสผ่าน
+        <input type="password" id="signupPasswordConfirm" required minlength="6">
+      </label>
+      <p class="auth-error" id="signupError"></p>
+      <p class="auth-success" id="signupSuccess"></p>
+      <button type="submit" class="search-btn auth-submit">สมัครสมาชิก</button>
+    </form>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="lantern" style="left:14%; top:22%; animation-delay:0s;"></div>
+  <div class="lantern" style="left:78%; top:16%; animation-delay:2s;"></div>
+  <div class="lantern" style="left:60%; top:34%; animation-delay:4s;"></div>
+  <div class="lantern" style="left:32%; top:40%; animation-delay:1s;"></div>
+  <div class="river-glow"></div>
+  <span class="eyebrow">PreferRent · โรงแรมริมแม่น้ำเจ้าพระยา ใจกลางกรุงเทพฯ</span>
+  <h1>ตื่นมาพร้อมสายลมแม่น้ำ<br><em>และวิวเมืองสุดพาโนรามา</em></h1>
+  <p>ห้องพักหรือระดับเมือง มองเห็นทั้งเส้นขอบฟ้ากรุงเทพฯ ยามค่ำคืนและแม่น้ำเจ้าพระยายามพระอาทิตย์ตก เลือกได้ทั้งห้องเตียงเดี่ยวและเตียงคู่ พร้อมสิ่งอำนวยความสะดวกครบครัน</p>
+</section>
+
+<div class="booking-bar" id="book">
+  <div class="booking-card">
+    <div class="field">
+      <label>วันเข้าพัก</label>
+      <input type="date" id="searchCheckIn">
+    </div>
+    <div class="field">
+      <label>วันออก</label>
+      <input type="date" id="searchCheckOut">
+    </div>
+    <div class="field guest-field" id="guestField">
+      <label>ผู้เข้าพัก</label>
+      <button type="button" class="guest-trigger" id="guestTrigger">
+        <span id="guestSummary">1 คน · 1 เตียง</span>
+        <span class="guest-arrow">▾</span>
+      </button>
+
+      <div class="guest-panel" id="guestPanel">
+        <div class="guest-row">
+          <div class="guest-row-label"><span>จำนวนเตียง</span></div>
+          <div class="guest-stepper">
+            <button type="button" class="step-btn" data-target="beds" data-action="minus">−</button>
+            <span class="step-value" id="bedsValue">1</span>
+            <button type="button" class="step-btn" data-target="beds" data-action="plus">+</button>
+          </div>
+        </div>
+        <div class="guest-row">
+          <div class="guest-row-label">
+            <span>ผู้เข้าพัก</span>
+          </div>
+          <div class="guest-stepper">
+            <button type="button" class="step-btn" data-target="adults" data-action="minus">−</button>
+            <span class="step-value" id="adultsValue">1</span>
+            <button type="button" class="step-btn" data-target="adults" data-action="plus">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>ประเภทห้อง</label>
+      <select id="roomTypeFilter">
+        <option>ทั้งหมด</option>
+        <option>วิวเมือง</option>
+        <option>ริมแม่น้ำ</option>
+      </select>
+    </div>
+    <button class="search-btn">ค้นหาห้องว่าง</button>
+  </div>
+</div>
+
+<section class="section" id="rooms">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">ห้องพัก</span>
+      <h2>เลือกห้องพักที่ใช่สำหรับคุณ</h2>
+      <p>ห้องพักทั้งหมด 12 ห้อง แบ่งเป็นห้องเตียงเดี่ยวและเตียงคู่ อย่างละ 6 ห้อง และแบ่งย่อยตามวิวเมืองหรือวิวริมแม่น้ำเจ้าพระยา อย่างละ 3 ห้องในแต่ละประเภท</p>
+    </div>
+    <div class="rooms" id="rooms-grid">
+      <p class="rooms-empty" style="grid-column:1/-1; text-align:center; opacity:.6;">กำลังโหลดห้องพัก…</p>
+    </div>
+  </div>
+</section>
+
+<section class="amenities" id="amenities">
+  <div class="wrap section" style="padding-top:80px;">
+    <div class="section-head" style="text-align:center;">
+      <span class="tag" style="color:var(--gold-soft);">สิ่งอำนวยความสะดวก</span>
+      <h2 style="color:var(--paper);">ทุกรายละเอียดเพื่อการพักผ่อนที่แท้จริง</h2>
+    </div>
+  </div>
+  <div class="amen-grid">
+    <div class="amen-item">
+      <div class="amen-icon">☕</div>
+      <h4>อาหารเช้าวิวแม่น้ำ</h4>
+      <p>อิ่มอร่อยกับเมนูเช้ายามพระอาทิตย์ขึ้นริมแม่น้ำเจ้าพระยา</p>
+    </div>
+    <div class="amen-item">
+      <div class="amen-icon">🏙</div>
+      <h4>ห้องพักวิวเมือง</h4>
+      <p>ชมเส้นขอบฟ้ากรุงเทพฯ ยามค่ำคืนจากห้องพักส่วนตัว</p>
+    </div>
+    <div class="amen-item">
+      <div class="amen-icon">♨</div>
+      <h4>สปาและฟิตเนส</h4>
+      <p>ผ่อนคลายด้วยสปาแผนไทยและห้องออกกำลังกายชั้นบนสุด</p>
+    </div>
+    <div class="amen-item">
+      <div class="amen-icon">🌇</div>
+      <h4>ระเบียงริมแม่น้ำ</h4>
+      <p>จิบเครื่องดื่มยามเย็นบนระเบียงห้องพักริมแม่น้ำ</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reviews">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center;">
+      <span class="tag">รีวิว</span>
+      <h2>เสียงจากแขกของเรา</h2>
+      <p>แชร์ประสบการณ์การเข้าพักของคุณให้แขกท่านอื่นได้อ่านกัน</p>
+    </div>
+
+    <div class="reviews-list" id="reviewsList">
+      <p class="detail-loading">กำลังโหลดรีวิว…</p>
+    </div>
+
+    <div class="review-form-wrap" id="reviewFormWrap"></div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <h2>พร้อมสัมผัสวิวแม่น้ำเจ้าพระยาหรือยัง?</h2>
+  <p>ห้องพักมีจำนวนจำกัดเพียง 12 ห้อง จองล่วงหน้าเพื่อรับห้องพักและราคาที่คุณต้องการ</p>
+  <a href="#book" class="search-btn">ตรวจสอบห้องว่าง</a>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>PreferRent</h4>
+        <p style="opacity:.6; max-width:280px;">123 ถนนเจริญกรุง แขวงบางรัก เขตบางรัก กรุงเทพฯ 10500</p>
+      </div>
+      <div>
+        <h4>ติดต่อ</h4>
+        <a href="tel:+6621234567">02-123-4567</a>
+        <a href="mailto:stay@preferrent.com">stay@preferrent.com</a>
+      </div>
+      <div>
+        <h4>ลิงก์</h4>
+        <a href="#rooms">ห้องพัก</a>
+        <a href="#amenities">สิ่งอำนวยความสะดวก</a>
+        <a href="#reviews">รีวิว</a>
+      </div>
+      <div>
+        <h4>ติดตามเรา</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2569 PreferRent Riverside Hotel สงวนลิขสิทธิ์</div>
+  </div>
+</footer>
+
+<script src="auth.js"></script>
+<script src="nav.js"></script>
+<script src="room-images.js"></script>
+<script src="script.js"></script>
+<script src="reviews.js"></script>
+</body>
+</html>
