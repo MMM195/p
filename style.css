@@ -103,10 +103,27 @@ nav.scrolled {
   font-weight: 400;
   opacity: .9;
   position: relative;
+  transition: color .25s ease, opacity .25s ease;
+}
+
+.navlinks a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width .3s cubic-bezier(.2,.8,.2,1);
 }
 
 .navlinks a:hover {
   opacity: 1;
+  color: var(--gold-soft);
+}
+
+.navlinks a:hover::after {
+  width: 100%;
 }
 
 .nav-cta {
@@ -809,15 +826,39 @@ nav.scrolled {
 .amen-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: rgba(243, 236, 218, .12);
-  border: 1px solid rgba(243, 236, 218, .12);
+  gap: 14px;
+  background: transparent;
+  border: none;
 }
 
 .amen-item {
-  background: var(--jade-deep);
+  background: rgba(243, 236, 218, .04);
+  border: 1px solid rgba(243, 236, 218, .12);
+  border-radius: 6px;
   padding: 40px 28px;
   text-align: center;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1),
+              box-shadow .35s ease,
+              background .35s ease,
+              border-color .35s ease;
+}
+
+.amen-item:hover {
+  transform: translateY(-8px);
+  background: rgba(243, 236, 218, .08);
+  border-color: var(--gold-soft);
+  box-shadow: 0 22px 40px -14px rgba(0, 0, 0, .55);
+  z-index: 2;
+}
+
+.amen-item:hover .amen-icon {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: scale(1.08);
 }
 
 .amen-icon {
@@ -831,6 +872,7 @@ nav.scrolled {
   justify-content: center;
   color: var(--gold-soft);
   font-size: 19px;
+  transition: transform .35s ease, border-color .35s ease, color .35s ease;
 }
 
 .amen-item h4 {
