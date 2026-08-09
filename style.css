@@ -1069,7 +1069,7 @@ footer {
   display: block;
   margin: auto;
   position: relative;
-  top: 10px;
+  top: 1px;
 }
 
 .social-icon:hover {
@@ -1573,6 +1573,8 @@ footer {
   font-family: 'Noto Serif Thai', serif;
   font-size: 26px;
   font-weight: 600;
+  object-fit: cover;
+  object-position: center;
 }
 
 .team-name {
