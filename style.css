@@ -1069,7 +1069,7 @@ footer {
   display: block;
   margin: auto;
   position: relative;
-  top: 1px;
+  top: 10px;
 }
 
 .social-icon:hover {
